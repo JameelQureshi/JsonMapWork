@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class LocationDataManager : MonoBehaviour
 {
-    public const string JsonURL = "http://euphoriaxr.com/Files/data.json";
+    public const string JsonURL = "https://euphoriaxr.com/Files/data.json";
     // Start is called before the first frame update
 
     public Image image;
