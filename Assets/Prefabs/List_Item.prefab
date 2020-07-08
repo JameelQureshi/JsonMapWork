@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 222093284362900854}
   - component: {fileID: 114079637985010346}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Next
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -394,6 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thumbnail: {fileID: 114720574760888266}
   description: {fileID: 114288131931619070}
+  distanceText: {fileID: 114326472838489210}
 --- !u!114 &114951867889164512
 MonoBehaviour:
   m_ObjectHideFlags: 1
