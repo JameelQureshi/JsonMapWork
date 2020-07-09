@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Mapbox.Unity.Location;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ public class ListDataCreator : MonoBehaviour {
 
     public GameObject prefab;
     public GameObject canvas;
-
+    private Location currentLocation;
     public static ListDataCreator instance;
     public void Awake()
     {
@@ -21,20 +22,37 @@ public class ListDataCreator : MonoBehaviour {
         }
     }
 
+    public void RePopulate()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        Populate(LocationDataManager.locationData);
+    }
 
     public void Populate(LocationData locationData)
     {
         GameObject newObj; // Create GameObject instance
-      
+        currentLocation = LocationProviderFactory.Instance.DeviceLocationProvider.CurrentLocation;
+
         for (int i = 0; i < locationData.ObjectLocations.Count ; i++)
         {
-            newObj = Instantiate(prefab, transform);
             string[] location = locationData.ObjectLocations[i].Location.Split(',');
-            newObj.GetComponent<ListItem>().Init( locationData.ObjectLocations[i].ThumbnailURL,
-                                                  locationData.ObjectLocations[i].Description,
-                                                  locationData.ObjectLocations[i].ObjectID,
-                                                  double.Parse(location[0]),
-                                                  double.Parse(location[1]));
+
+            if (DistanceCalculator.IsPointInTheRange(currentLocation.LatitudeLongitude.x,
+                currentLocation.LatitudeLongitude.y, double.Parse(location[0]), double.Parse(location[1]),LocationDataManager.Radius))
+            {
+                newObj = Instantiate(prefab, transform);
+                newObj.GetComponent<ListItem>().Init(locationData.ObjectLocations[i].ThumbnailURL,
+                                                      locationData.ObjectLocations[i].Description,
+                                                      locationData.ObjectLocations[i].ObjectID,
+                                                      double.Parse(location[0]),
+                                                      double.Parse(location[1]));
+            }
+
+
+            
         }
 
         float width = canvas.GetComponent<RectTransform>().rect.width;

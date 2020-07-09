@@ -19,6 +19,10 @@ public class ListItem : MonoBehaviour {
     {
         LocationProviderFactory.Instance.DeviceLocationProvider.OnLocationUpdated += OnUpdateLocationCalled;
     }
+    private void OnDestroy()
+    {
+        LocationProviderFactory.Instance.DeviceLocationProvider.OnLocationUpdated -= OnUpdateLocationCalled;
+    }
 
     public void Init(string thumbnailURL , string descriptionText , string objectID , double lat,double lon)
     {
@@ -32,19 +36,14 @@ public class ListItem : MonoBehaviour {
 
     private void OnUpdateLocationCalled(Location location)
     {
-        Debug.Log(location.LatitudeLongitude);
         SetDistance(DistanceCalculator.DistanceBetweenPlaces(location.LatitudeLongitude.x, location.LatitudeLongitude.y,m_lat,m_lon));
     }
 
 
     public void SetDistance(double x)
     {
-        int  distance = (int)x;
-        double Miles;
+        double Miles = DistanceCalculator.ConvertToMiles(x);
 
-        Miles = x / 1609.344f;
-        Miles = Miles * 10;
-        Miles = System.Math.Truncate(Miles) / 10;
         if (Miles > 0.1f)
         {
             distanceText.text = "" + Miles + " Miles";
