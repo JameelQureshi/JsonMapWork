@@ -41,7 +41,7 @@ public class ResetToStartPosition : MonoBehaviour
 
     public void Reset()
     {
-        Debug.Log("Clicked");
+
         Vector2d devicelatlong;
 
 

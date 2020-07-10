@@ -28,6 +28,12 @@ public class ListDataCreator : MonoBehaviour {
         {
             Destroy(child.gameObject);
         }
+
+        foreach (GameObject obj in MapPointsPlacement._spawnedObjects)
+        {
+            Destroy(obj);
+        }
+        MapPointsPlacement._spawnedObjects.Clear();
         Populate(LocationDataManager.locationData);
     }
 
@@ -35,6 +41,9 @@ public class ListDataCreator : MonoBehaviour {
     {
         GameObject newObj; // Create GameObject instance
         currentLocation = LocationProviderFactory.Instance.DeviceLocationProvider.CurrentLocation;
+
+        MapPointsPlacement.instance.currentLocation = currentLocation;
+        MapPointsPlacement.instance.PlacePoints(locationData);
 
         for (int i = 0; i < locationData.ObjectLocations.Count ; i++)
         {

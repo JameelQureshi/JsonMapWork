@@ -13,7 +13,7 @@ public class ListItem : MonoBehaviour {
     static Vector2 devicelatlong;
     double m_lat;
     double m_lon;
-
+    public string ObjectID;
 
     private void Start()
     {
@@ -31,6 +31,7 @@ public class ListItem : MonoBehaviour {
         GetComponent<Button>().onClick.AddListener(delegate { TaskOnClick(objectID); });
         m_lat = lat;
         m_lon = lon;
+        ObjectID = objectID;
 
     }
 
@@ -73,12 +74,24 @@ public class ListItem : MonoBehaviour {
 
             Sprite thumbnailSprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             thumbnail.sprite = thumbnailSprite;
-
+            SetThumbnailMapItem(ObjectID, thumbnailSprite);
         }
     }
 
-    void TaskOnClick(string ObjectID)
+    public void SetThumbnailMapItem(string objectID, Sprite thumbnail)
     {
-        Debug.Log(ObjectID);
+        foreach (GameObject point in  MapPointsPlacement._spawnedObjects)
+        {
+            if (point.GetComponent<MapItem>().ObjectID == objectID)
+            {
+                point.GetComponent<MapItem>().thumbnail.sprite = thumbnail;
+                return;
+            }
+        }
+    }
+
+    void TaskOnClick(string _ObjectID)
+    {
+        Debug.Log(_ObjectID);
     }
 }
