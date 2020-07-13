@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class LocationDataManager : MonoBehaviour
 {
-    public const string JsonURL = "https://euphoriaxr.com/Files/Testdata.json";
+    public string JsonURL = "";
     public static LocationData locationData;
     // Start is called before the first frame update
     public static int Radius
@@ -23,7 +23,6 @@ public class LocationDataManager : MonoBehaviour
         }
     }
 
-    public Image image;
 
     void Start()
     {
