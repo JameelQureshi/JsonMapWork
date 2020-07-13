@@ -1612,7 +1612,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapManager: {fileID: 1592343162}
-  _deviceLocationProviderUnity: {fileID: 348976883}
+  _deviceLocationProviderUnity: {fileID: 361473950}
   _deviceLocationProviderAndroid: {fileID: 675886030}
   _editorLocationProvider: {fileID: 382865730}
   _transformLocationProvider: {fileID: 1462927847}
