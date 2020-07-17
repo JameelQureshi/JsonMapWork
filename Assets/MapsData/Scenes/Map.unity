@@ -430,6 +430,7 @@ GameObject:
   m_Component:
   - component: {fileID: 275780384}
   - component: {fileID: 275780385}
+  - component: {fileID: 275780386}
   m_Layer: 5
   m_Name: RadiusSlider
   m_TagString: Untagged
@@ -498,9 +499,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 102300102}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 4000
+  m_MaxValue: 40
   m_WholeNumbers: 0
-  m_Value: 4
+  m_Value: 36.6
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -517,6 +518,17 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &275780386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 275780383}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70bc1b76aaa844b1595831c8e8210a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &287389307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1612,7 +1624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapManager: {fileID: 1592343162}
-  _deviceLocationProviderUnity: {fileID: 361473950}
+  _deviceLocationProviderUnity: {fileID: 348976883}
   _deviceLocationProviderAndroid: {fileID: 675886030}
   _editorLocationProvider: {fileID: 382865730}
   _transformLocationProvider: {fileID: 1462927847}
@@ -2656,7 +2668,7 @@ MonoBehaviour:
   _options:
     locationOptions:
       latitudeLongitude: 48.85825,2.29450
-      zoom: 16
+      zoom: 10
     extentOptions:
       extentType: 0
       defaultExtents:
@@ -2837,7 +2849,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c699b8e1864b4b248acb7a04ede9480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panSpeed: 15
+  _panSpeed: 12
   _zoomSpeed: 0.25
   _referenceCamera: {fileID: 534669904}
   _mapManager: {fileID: 1592343162}
@@ -2857,7 +2869,7 @@ MonoBehaviour:
   StartLatLong:
     x: 0
     y: 0
-  Zoom: 15
+  Zoom: 14
   lpf: {fileID: 809079231}
 --- !u!1 &1608692128
 GameObject:

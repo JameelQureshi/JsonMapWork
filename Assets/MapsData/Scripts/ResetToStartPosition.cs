@@ -26,10 +26,9 @@ public class ResetToStartPosition : MonoBehaviour
 #if !UNITY_EDITOR
          StartLatLong=LocationProviderFactory.Instance.DeviceLocationProvider.CurrentLocation.LatitudeLongitude;
 #endif
-        _map.Initialize(StartLatLong, 15);
+        _map.Initialize(StartLatLong, (int)Zoom);
         _map.SetCenterLatitudeLongitude(StartLatLong);
         lpf = LocationProviderFactory.Instance;
-        Zoom = _map.Zoom;
         _map.UpdateMap(StartLatLong);
     }
 

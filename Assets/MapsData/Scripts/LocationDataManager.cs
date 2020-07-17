@@ -34,7 +34,7 @@ public class LocationDataManager : MonoBehaviour
     {
         if (locationData!=null)
         {
-            Debug.Log(locationData.ObjectLocations.Count);
+            MapPointsPlacement.instance.PlacePoints(locationData);
             ListDataCreator.instance.Populate(locationData);
             Destroy(gameObject);
         }
@@ -72,6 +72,7 @@ public class LocationDataManager : MonoBehaviour
 [Serializable]
 public class LocationData
 {
+    public string userID;
     public List<ObjectLocation> ObjectLocations;
 }
 

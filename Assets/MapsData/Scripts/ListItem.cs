@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class ListItem : MonoBehaviour {
 
+
     public Image thumbnail;
     public Text description;
     public Text distanceText;
@@ -14,6 +15,7 @@ public class ListItem : MonoBehaviour {
     double m_lat;
     double m_lon;
     public string ObjectID;
+
 
     private void Start()
     {
@@ -26,13 +28,13 @@ public class ListItem : MonoBehaviour {
 
     public void Init(string thumbnailURL , string descriptionText , string objectID , double lat,double lon)
     {
-        StartCoroutine(GetThumbnail(thumbnailURL));
+
         description.text = descriptionText;
         GetComponent<Button>().onClick.AddListener(delegate { TaskOnClick(objectID); });
         m_lat = lat;
         m_lon = lon;
         ObjectID = objectID;
-
+        GetImageFromMapItem();
     }
 
     private void OnUpdateLocationCalled(Location location)
@@ -40,6 +42,21 @@ public class ListItem : MonoBehaviour {
         SetDistance(DistanceCalculator.DistanceBetweenPlaces(location.LatitudeLongitude.x, location.LatitudeLongitude.y,m_lat,m_lon));
     }
 
+    public void GetImageFromMapItem()
+    {
+        foreach (GameObject mapItem in MapPointsPlacement._spawnedObjects)
+        {
+            MapItem mp = mapItem.GetComponent<MapItem>();
+            if (mp.ObjectID == ObjectID)
+            {
+                if (mp.isThumbnailLoaded)
+                {
+                    thumbnail.sprite = mp.thumbnail.sprite;
+                    return;
+                }
+            }
+        }
+    }
 
     public void SetDistance(double x)
     {
@@ -74,21 +91,10 @@ public class ListItem : MonoBehaviour {
 
             Sprite thumbnailSprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f));
             thumbnail.sprite = thumbnailSprite;
-            SetThumbnailMapItem(ObjectID, thumbnailSprite);
+
         }
     }
 
-    public void SetThumbnailMapItem(string objectID, Sprite thumbnail)
-    {
-        foreach (GameObject point in  MapPointsPlacement._spawnedObjects)
-        {
-            if (point.GetComponent<MapItem>().ObjectID == objectID)
-            {
-                point.GetComponent<MapItem>().thumbnail.sprite = thumbnail;
-                return;
-            }
-        }
-    }
 
     void TaskOnClick(string _ObjectID)
     {

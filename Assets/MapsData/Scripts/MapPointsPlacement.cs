@@ -21,7 +21,6 @@ public class MapPointsPlacement : MonoBehaviour {
     Vector2d[] _coordinates;
     bool instatiatedmap = false;
     public GameObject CheckpointIndicator;
-    public Location currentLocation;
 
     public static MapPointsPlacement instance;
     public void Awake()
@@ -46,19 +45,16 @@ public class MapPointsPlacement : MonoBehaviour {
         for (int i = 0; i < locationData.ObjectLocations.Count; i++)
         {
             string[] location = locationData.ObjectLocations[i].Location.Split(',');
-            if (DistanceCalculator.IsPointInTheRange(currentLocation.LatitudeLongitude.x,
-                currentLocation.LatitudeLongitude.y, double.Parse(location[0]), double.Parse(location[1]), LocationDataManager.Radius))
-            {
 
                 _locations[count] = Conversions.StringToLatLon(locationData.ObjectLocations[i].Location);
                 var mapPoint = Instantiate(CheckpointIndicator);
                 mapPoint.transform.position = _map.GeoToWorldPosition(_locations[count], false);
-                mapPoint.GetComponent<MapItem>().Init(locationData.ObjectLocations[i].ObjectID);
+                mapPoint.GetComponent<MapItem>().Init(locationData.ObjectLocations[i].ObjectID, locationData.ObjectLocations[i].ThumbnailURL);
                 Debug.LogWarning(_map.GeoToWorldPosition(_locations[count], true));
 
                 _spawnedObjects.Add(mapPoint);
                 count++;
-            }
+           
         }
         instatiatedmap = true;
 
